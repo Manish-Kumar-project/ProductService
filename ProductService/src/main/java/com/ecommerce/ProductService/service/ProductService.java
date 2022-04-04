@@ -1,6 +1,8 @@
 package com.ecommerce.ProductService.service;
 
 import com.ecommerce.ProductService.entities.Product;
+import com.ecommerce.ProductService.entities.ProductCatalog;
+import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,6 @@ public class ProductService {
         List<Product> listOfProducts = productRepository.findAll();
         return listOfProducts;
     }
+
 
 }
