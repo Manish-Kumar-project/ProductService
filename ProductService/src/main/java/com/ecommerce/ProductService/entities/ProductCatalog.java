@@ -1,8 +1,15 @@
 package com.ecommerce.ProductService.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductCatalog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

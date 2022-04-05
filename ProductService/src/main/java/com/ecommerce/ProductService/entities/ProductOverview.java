@@ -1,9 +1,16 @@
 package com.ecommerce.ProductService.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "product_overview")
 public class ProductOverview {
     @Id
@@ -68,5 +75,5 @@ public class ProductOverview {
     @JoinColumn(name = "product_catalog_productcatalog_id")
     private ProductCatalog productCatalog;
 
-    
+
 }

@@ -1,8 +1,10 @@
 package com.ecommerce.ProductService.controller;
 
 import com.ecommerce.ProductService.entities.Product;
+import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import com.ecommerce.ProductService.service.ProductService;
+import com.ecommerce.ProductService.service.serviceimpl.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductCategoryService productCategoryService;
+
 
 
     @PostMapping(value = "/product")
@@ -33,5 +38,12 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> allproducts = productService.getAllProducts();
         return new ResponseEntity<List<Product>>(allproducts,HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/add/product")
+    public ProductCategory saveCustomer(@RequestBody ProductCategory productCategory){
+        productCategoryService.saveMember(productCategory);
+        return productCategory;
+
     }
 }
