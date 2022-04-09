@@ -1,6 +1,7 @@
 package com.ecommerce.ProductService.controller;
 
 import com.ecommerce.ProductService.entities.Product;
+import com.ecommerce.ProductService.entities.ProductCatalog;
 import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import com.ecommerce.ProductService.service.ProductService;
@@ -44,6 +45,11 @@ public class ProductController {
     public ProductCategory saveCustomer(@RequestBody ProductCategory productCategory){
         productCategoryService.saveMember(productCategory);
         return productCategory;
+
+    }
+    @PostMapping(value = "/productcatalog")
+    public void configureProductIndividual(@RequestBody List<ProductCatalog> productCatalogs){
+        productCategoryService.configureProductIndividual(productCatalogs);
 
     }
 }

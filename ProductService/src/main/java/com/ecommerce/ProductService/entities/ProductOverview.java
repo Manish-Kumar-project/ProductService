@@ -1,14 +1,13 @@
 package com.ecommerce.ProductService.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "product_overview")
@@ -71,7 +70,7 @@ public class ProductOverview {
     private String productModelName;
 
 
-    @OneToOne(orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_catalog_productcatalog_id")
     private ProductCatalog productCatalog;
 

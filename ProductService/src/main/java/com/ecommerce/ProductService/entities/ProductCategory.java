@@ -1,21 +1,20 @@
 package com.ecommerce.ProductService.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "categoryId")
+        @Column(name = "categoryId")
     private Long categoryId;
     @Column(name="category_unique_id", length=20, nullable=false, unique=true)
     private Long categoryUniqueId;
@@ -24,7 +23,7 @@ public class ProductCategory {
     @Column(name="category_quantity", length=10, nullable=false, unique=false)
     private Integer categoryQuantity;
 
-    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<ProductCatalog> productCatalogs = new ArrayList<>();
 
 

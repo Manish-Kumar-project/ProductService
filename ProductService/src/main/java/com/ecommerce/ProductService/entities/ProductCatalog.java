@@ -1,15 +1,14 @@
 package com.ecommerce.ProductService.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class ProductCatalog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +37,7 @@ public class ProductCatalog {
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 
-    @OneToOne(mappedBy = "productCatalog", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "productCatalog", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private ProductOverview productOverview;
 
     public ProductOverview getProductOverview() {
