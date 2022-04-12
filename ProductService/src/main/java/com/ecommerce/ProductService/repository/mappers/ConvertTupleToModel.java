@@ -1,5 +1,6 @@
 package com.ecommerce.ProductService.repository.mappers;
 
+import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 
 import javax.persistence.Tuple;
@@ -24,5 +25,37 @@ public class ConvertTupleToModel {
         }
 
         return productCategoryModel;
+    }
+    public static ProductCatalogModel convertToProductCatalogModel(Tuple tuple) {
+        ProductCatalogModel productCatalogModel = new ProductCatalogModel();
+        if (tuple.get("is_discount_available_on_catalog") != null) {
+            Boolean isDiscountAvailable = (Boolean) tuple.get("is_discount_available_on_catalog");
+            productCatalogModel.setIsDiscountAvailableOnCatalog(isDiscountAvailable);
+        }
+        if (tuple.get("product_catalog_name") != null) {
+            String catalogName = (String) tuple.get("product_catalog_name");
+            productCatalogModel.setProductCatalogName( catalogName);
+        }
+        if (tuple.get("product_catalog_quantity") != null) {
+            Integer quantity = (Integer) tuple.get("product_catalog_quantity");
+            productCatalogModel.setProductCatalogQuantity(quantity.intValue());
+        }
+        if (tuple.get("product_catalog_type") != null) {
+            String productCatalogType = (String) tuple.get("product_catalog_type");
+            productCatalogModel.setProductCatalogType(productCatalogType);
+        }
+        if (tuple.get("product_catalog_unique_id") != null) {
+            Integer catalogUniqueId = (Integer) tuple.get("product_catalog_unique_id");
+            productCatalogModel.setProductCatalogUniqueId(catalogUniqueId.intValue());
+        }
+        if (tuple.get("product_overview_description") != null) {
+            String productOverviewDescription = (String) tuple.get("product_overview_description");
+            productCatalogModel.setProductOverviewDescription(productOverviewDescription);
+        }
+        if (tuple.get("product_category_id") != null) {
+            BigInteger productCategoryId = (BigInteger) tuple.get("product_category_id");
+            productCatalogModel.setProductCategoryId(productCategoryId.intValue());
+        }
+        return productCatalogModel;
     }
 }

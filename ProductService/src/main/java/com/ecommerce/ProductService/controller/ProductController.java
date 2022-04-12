@@ -6,6 +6,7 @@ import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductRepository;
+import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import com.ecommerce.ProductService.service.ProductService;
 import com.ecommerce.ProductService.service.serviceimpl.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class ProductController {
     @Autowired
     private ProductCategoryService productCategoryService;
 
-
+    @Autowired
+    private ProductCategoryImplementation productCategoryImplementation;
 
     @PostMapping(value = "/product")
     public ResponseEntity<Product> saveCustomer(@RequestBody Product product){
@@ -57,6 +59,11 @@ public class ProductController {
     @GetMapping(value = "/productcategories")
     public ResponseEntity<SearchCriteriaBaseModel> getProductCategoriesList() {
         SearchCriteriaBaseModel searchCriteriaBaseModel = productCategoryService.getProductCategoriesList();
+        return new ResponseEntity<SearchCriteriaBaseModel>(searchCriteriaBaseModel,HttpStatus.OK);
+    }
+    @GetMapping(value = "/productcatalog")
+    public ResponseEntity<SearchCriteriaBaseModel> getProductCatalogList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = productCategoryService.getProductCatalogList();
         return new ResponseEntity<SearchCriteriaBaseModel>(searchCriteriaBaseModel,HttpStatus.OK);
     }
 }

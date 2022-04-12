@@ -17,5 +17,6 @@ public class ProductCatalogModel implements Serializable {
     private Integer productCatalogUniqueId;
     private Integer productCatalogQuantity;
     private Boolean isDiscountAvailableOnCatalog = false;
+    private Integer productCategoryId;
 
 }

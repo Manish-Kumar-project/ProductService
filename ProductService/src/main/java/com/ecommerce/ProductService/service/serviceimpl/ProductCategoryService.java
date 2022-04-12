@@ -1,5 +1,6 @@
 package com.ecommerce.ProductService.service.serviceimpl;
 
+import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductCatalogRepository;
@@ -105,6 +106,13 @@ public class ProductCategoryService {
         List<ProductCategoryModel> productCategoryModels = productCategoryImplementation.getProductCategoriesList();
         searchCriteriaBaseModel.setTotalCount((long)productCategoryModels.size());
         searchCriteriaBaseModel.setContent(productCategoryModels);
+        return searchCriteriaBaseModel;
+    }
+    public SearchCriteriaBaseModel<ProductCatalogModel> getProductCatalogList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = new SearchCriteriaBaseModel();
+        List<ProductCatalogModel> productCatalogModels = productCategoryImplementation.getProductCatalogList();
+        searchCriteriaBaseModel.setTotalCount((long)productCatalogModels.size());
+        searchCriteriaBaseModel.setContent(productCatalogModels);
         return searchCriteriaBaseModel;
     }
 }
