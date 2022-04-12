@@ -1,7 +1,10 @@
 package com.ecommerce.ProductService.service.serviceimpl;
 
+import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductCatalogRepository;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
+import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ecommerce.ProductService.entities.*;
@@ -15,6 +18,9 @@ public class ProductCategoryService {
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    private ProductCategoryImplementation productCategoryImplementation;
 
     public ProductCategory saveMember(ProductCategory productCategory) {
         ProductCategory category = new ProductCategory();
@@ -94,5 +100,11 @@ public class ProductCategoryService {
         //    addressRepository.saveAll(addresses);
         productCategoryRepository.save(category);
     }
-
+    public SearchCriteriaBaseModel<ProductCategoryModel> getProductCategoriesList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = new SearchCriteriaBaseModel();
+        List<ProductCategoryModel> productCategoryModels = productCategoryImplementation.getProductCategoriesList();
+        searchCriteriaBaseModel.setTotalCount((long)productCategoryModels.size());
+        searchCriteriaBaseModel.setContent(productCategoryModels);
+        return searchCriteriaBaseModel;
+    }
 }

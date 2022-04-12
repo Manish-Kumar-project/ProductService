@@ -3,6 +3,8 @@ package com.ecommerce.ProductService.controller;
 import com.ecommerce.ProductService.entities.Product;
 import com.ecommerce.ProductService.entities.ProductCatalog;
 import com.ecommerce.ProductService.entities.ProductCategory;
+import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import com.ecommerce.ProductService.service.ProductService;
 import com.ecommerce.ProductService.service.serviceimpl.ProductCategoryService;
@@ -51,5 +53,10 @@ public class ProductController {
     public void configureProductIndividual(@RequestBody List<ProductCatalog> productCatalogs){
         productCategoryService.configureProductIndividual(productCatalogs);
 
+    }
+    @GetMapping(value = "/productcategories")
+    public ResponseEntity<SearchCriteriaBaseModel> getProductCategoriesList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = productCategoryService.getProductCategoriesList();
+        return new ResponseEntity<SearchCriteriaBaseModel>(searchCriteriaBaseModel,HttpStatus.OK);
     }
 }
