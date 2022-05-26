@@ -2,14 +2,12 @@ package com.ecommerce.ProductService.model.v1;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @ToString
-public class ProductCatalogModel implements Serializable {
+public class ProductCatalogModel {
 
     private String productCatalogName;
     private String productCatalogType;

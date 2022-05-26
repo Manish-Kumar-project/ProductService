@@ -52,4 +52,9 @@ public class ProductController {
         productCategoryService.configureProductIndividual(productCatalogs);
 
     }
+    @GetMapping(value = "/productcatagories")
+    public ResponseEntity<List<ProductCategory>> getAllProductCategories(){
+        List<ProductCategory> allproducts = productCategoryService.getAllProductCategories();
+        return new ResponseEntity<List<ProductCategory>>(allproducts,HttpStatus.OK);
+    }
 }

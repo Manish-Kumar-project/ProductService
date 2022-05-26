@@ -1,13 +1,13 @@
 package com.ecommerce.ProductService.service.serviceimpl;
 
-import com.ecommerce.ProductService.repository.ProductCatalogRepository;
+import com.ecommerce.ProductService.entities.ProductCatalog;
+import com.ecommerce.ProductService.entities.ProductCategory;
+import com.ecommerce.ProductService.entities.ProductOverview;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecommerce.ProductService.entities.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,7 +54,8 @@ public class ProductCategoryService {
         productCategoryRepository.save(category);
         return null;
     }
-    public void configureProductIndividual(List<ProductCatalog> productCatalogItems){
+
+    public void configureProductIndividual(List<ProductCatalog> productCatalogItems) {
         ProductCategory category = new ProductCategory();
         List<ProductCatalog> productCatalogs = new ArrayList<>();
         ProductCategory productCategory = productCategoryRepository.findByCategoryUniqueId(180280008L);
@@ -93,6 +94,16 @@ public class ProductCategoryService {
         category.setProductCatalogs(productCatalogs);
         //    addressRepository.saveAll(addresses);
         productCategoryRepository.save(category);
+    }
+
+    public List<ProductCategory> getAllProductCategories() {
+
+        List<ProductCategory> categories = productCategoryRepository.findAll();
+        if (!categories.isEmpty()) {
+            return categories;
+        } else {
+            return null;
+        }
     }
 
 }
