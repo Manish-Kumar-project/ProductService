@@ -1,6 +1,5 @@
 package com.ecommerce.ProductService.repository.impl;
 
-import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.repository.mappers.ConvertTupleToModel;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +19,9 @@ public class ProductCategoryImplementation {
 
     @Autowired
     private EntityManager entityManager;
+
+
+
 
     public List<ProductCategoryModel> getProductCategoriesList() {
         List<Tuple> tuples = new ArrayList<>();
@@ -63,5 +66,22 @@ public class ProductCategoryImplementation {
         tuples = (List<Tuple>) query.getResultList();
         List<ProductCatalogModel> productCatalogModels = tuples.stream().map(ConvertTupleToModel::convertToProductCatalogModel).collect(Collectors.toList());
         return productCatalogModels;
+    }
+
+    @Transactional
+    public void updateProductsQuantity(Integer productQuantity,Integer productCatalogUniqueId){
+      //  ProductCatalog productCatalogModelFromDB = productCatalogRepository.findByProductCatalogUniqueId(productCatalogModel.getProductCatalogUniqueId());
+        //Integer productUpdateQuantity = productCatalogModelFromDB.getProductCatalogQuantity()-productCatalogModel.getProductCatalogQuantity();
+            StringBuilder updateQuery = new StringBuilder();
+            try {
+                updateQuery.append("update  testdb.product_catalog productcatalog set");
+                updateQuery.append(" productcatalog.product_catalog_quantity = '" + productQuantity+"'");
+                updateQuery.append(" where  productcatalog.product_catalog_unique_id = '" + productCatalogUniqueId+"'");
+                entityManager.createNativeQuery(updateQuery.toString()).executeUpdate();
+            } catch (Exception exception) {
+                System.out.println("Exception occured : " + exception.getStackTrace());
+            }
+
+
     }
 }

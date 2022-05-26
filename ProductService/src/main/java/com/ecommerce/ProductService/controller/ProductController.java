@@ -3,7 +3,6 @@ package com.ecommerce.ProductService.controller;
 import com.ecommerce.ProductService.entities.Product;
 import com.ecommerce.ProductService.entities.ProductCatalog;
 import com.ecommerce.ProductService.entities.ProductCategory;
-import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;

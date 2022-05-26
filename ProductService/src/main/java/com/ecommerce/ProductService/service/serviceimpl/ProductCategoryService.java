@@ -6,6 +6,7 @@ import com.ecommerce.ProductService.entities.ProductOverview;
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
+import com.ecommerce.ProductService.repository.ProductCatalogRepository;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
 import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ProductCategoryService {
 
     @Autowired
     private ProductCategoryImplementation productCategoryImplementation;
+
+    @Autowired
+    private ProductCatalogRepository productCatalogRepository;
 
     public ProductCategory saveMember(ProductCategory productCategory) {
         ProductCategory category = new ProductCategory();
@@ -126,4 +130,9 @@ public class ProductCategoryService {
         searchCriteriaBaseModel.setContent(productCatalogModels);
         return searchCriteriaBaseModel;
     }
-}
+    public void updateProductsQuantity(ProductCatalogModel productCatalogModel) {
+        ProductCatalog productCatalogModelFromDB = productCatalogRepository.findByProductCatalogUniqueId(productCatalogModel.getProductCatalogUniqueId());
+        Integer productUpdateQuantity = productCatalogModelFromDB.getProductCatalogQuantity() - productCatalogModel.getProductCatalogQuantity();
+        productCategoryImplementation.updateProductsQuantity(productUpdateQuantity,productCatalogModel.getProductCatalogUniqueId());
+    }
+    }
