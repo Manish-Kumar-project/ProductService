@@ -1,13 +1,18 @@
 package com.ecommerce.ProductService.service.serviceimpl;
 
-import com.ecommerce.ProductService.entities.ProductCatalog;
-import com.ecommerce.ProductService.entities.ProductCategory;
-import com.ecommerce.ProductService.entities.ProductOverview;
+import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
+import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
+import com.ecommerce.ProductService.repository.ProductCatalogRepository;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
+import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
+import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ecommerce.ProductService.entities.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +20,9 @@ public class ProductCategoryService {
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    private ProductCategoryImplementation productCategoryImplementation;
 
     public ProductCategory saveMember(ProductCategory productCategory) {
         ProductCategory category = new ProductCategory();
@@ -54,8 +62,7 @@ public class ProductCategoryService {
         productCategoryRepository.save(category);
         return null;
     }
-
-    public void configureProductIndividual(List<ProductCatalog> productCatalogItems) {
+    public void configureProductIndividual(List<ProductCatalog> productCatalogItems){
         ProductCategory category = new ProductCategory();
         List<ProductCatalog> productCatalogs = new ArrayList<>();
         ProductCategory productCategory = productCategoryRepository.findByCategoryUniqueId(180280008L);
@@ -106,4 +113,18 @@ public class ProductCategoryService {
         }
     }
 
+    public SearchCriteriaBaseModel<ProductCategoryModel> getProductCategoriesList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = new SearchCriteriaBaseModel();
+        List<ProductCategoryModel> productCategoryModels = productCategoryImplementation.getProductCategoriesList();
+        searchCriteriaBaseModel.setTotalCount((long)productCategoryModels.size());
+        searchCriteriaBaseModel.setContent(productCategoryModels);
+        return searchCriteriaBaseModel;
+    }
+    public SearchCriteriaBaseModel<ProductCatalogModel> getProductCatalogList() {
+        SearchCriteriaBaseModel searchCriteriaBaseModel = new SearchCriteriaBaseModel();
+        List<ProductCatalogModel> productCatalogModels = productCategoryImplementation.getProductCatalogList();
+        searchCriteriaBaseModel.setTotalCount((long)productCatalogModels.size());
+        searchCriteriaBaseModel.setContent(productCatalogModels);
+        return searchCriteriaBaseModel;
+    }
 }
