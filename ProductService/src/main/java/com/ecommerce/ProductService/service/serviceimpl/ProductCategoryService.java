@@ -1,18 +1,17 @@
 package com.ecommerce.ProductService.service.serviceimpl;
 
+import com.ecommerce.ProductService.entities.ProductCatalog;
+import com.ecommerce.ProductService.entities.ProductCategory;
+import com.ecommerce.ProductService.entities.ProductOverview;
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
-import com.ecommerce.ProductService.repository.ProductCatalogRepository;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
-import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecommerce.ProductService.entities.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
