@@ -9,6 +9,7 @@ import lombok.*;
 @ToString
 public class ProductCatalogModel {
 
+    private Long productCatalogId;
     private String productCatalogName;
     private String productCatalogType;
     private String productOverviewDescription;

@@ -52,6 +52,7 @@ public class ProductCategoryImplementation {
         StringBuilder whereQuery = new StringBuilder();
 
         selectQuery.append("select catalog.is_discount_available_on_catalog,");
+        selectQuery.append("catalog.productcatalog_id,");
         selectQuery.append("catalog.product_catalog_name,");
         selectQuery.append("catalog.product_catalog_type,");
         selectQuery.append("catalog.product_catalog_quantity,");

@@ -16,7 +16,7 @@ public class ConvertTupleToModel {
             productCategoryModel.setCategoryName( categoryName);
         }
         if (tuple.get("category_quantity") != null) {
-            Integer quantity = (Integer) tuple.get("category_quantity");
+            BigInteger quantity = (BigInteger) tuple.get("category_quantity");
             productCategoryModel.setCategoryQuantity(quantity.intValue());
         }
         if (tuple.get("category_unique_id") != null) {
@@ -28,6 +28,10 @@ public class ConvertTupleToModel {
     }
     public static ProductCatalogModel convertToProductCatalogModel(Tuple tuple) {
         ProductCatalogModel productCatalogModel = new ProductCatalogModel();
+        if (tuple.get("productcatalog_id") != null) {
+            BigInteger productCatalogId = (BigInteger) tuple.get("productcatalog_id");
+            productCatalogModel.setProductCatalogId(productCatalogId.longValue());
+        }
         if (tuple.get("is_discount_available_on_catalog") != null) {
             Boolean isDiscountAvailable = (Boolean) tuple.get("is_discount_available_on_catalog");
             productCatalogModel.setIsDiscountAvailableOnCatalog(isDiscountAvailable);
