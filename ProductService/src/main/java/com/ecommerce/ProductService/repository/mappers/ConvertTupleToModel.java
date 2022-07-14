@@ -2,9 +2,9 @@ package com.ecommerce.ProductService.repository.mappers;
 
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.ProductOverviewModel;
 
 import javax.persistence.Tuple;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class ConvertTupleToModel {
@@ -58,4 +58,39 @@ public class ConvertTupleToModel {
         }
         return productCatalogModel;
     }
-}
+    public static ProductOverviewModel convertToProductOverviewModel(Tuple tuple) {
+        ProductOverviewModel productOverviewModel = new ProductOverviewModel();
+        if (tuple.get("product_name") != null) {
+            String productName = (String) tuple.get("product_name");
+            productOverviewModel.setProductName(productName);
+        }
+        if (tuple.get("product_price") != null) {
+            Double productPrice = (Double) tuple.get("product_price");
+            productOverviewModel.setProductPrice(productPrice.doubleValue());
+        }
+        if (tuple.get("product_discount") != null) {
+            Double productDiscount = (Double) tuple.get("product_discount");
+            productOverviewModel.setProductDiscount(productDiscount.doubleValue());
+        }
+        if (tuple.get("product_description") != null) {
+            String productDescription = (String) tuple.get("product_description");
+            productOverviewModel.setProductDescription(productDescription);
+        }
+        if (tuple.get("product_brand") != null) {
+            String productBrand = (String) tuple.get("product_brand");
+            productOverviewModel.setProductBrand(productBrand);
+        }
+        if (tuple.get("product_model_number") != null) {
+            BigInteger productModelNumber = (BigInteger) tuple.get("product_model_number");
+            productOverviewModel.setProductModelNumber(productModelNumber.longValue());
+        }
+        if (tuple.get("product_model_name") != null) {
+            String productModelName = (String) tuple.get("product_model_name");
+            productOverviewModel.setProductBrand(productModelName);
+        }
+
+        return productOverviewModel;
+    }
+    }
+
+

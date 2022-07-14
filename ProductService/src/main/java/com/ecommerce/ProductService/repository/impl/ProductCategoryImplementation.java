@@ -2,6 +2,7 @@ package com.ecommerce.ProductService.repository.impl;
 
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.ProductOverviewModel;
 import com.ecommerce.ProductService.repository.mappers.ConvertTupleToModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -67,6 +68,38 @@ public class ProductCategoryImplementation {
         List<ProductCatalogModel> productCatalogModels = tuples.stream().map(ConvertTupleToModel::convertToProductCatalogModel).collect(Collectors.toList());
         return productCatalogModels;
     }
+    public ProductOverviewModel getProductOverview(Integer productDetailId) {
+        List<Tuple> tuples = new ArrayList<>();
+
+        StringBuilder selectQuery = new StringBuilder();
+        StringBuilder fromQuery = new StringBuilder();
+        StringBuilder whereQuery = new StringBuilder();
+
+        selectQuery.append("select product.product_name,");
+        selectQuery.append("product.product_price,");
+//        selectQuery.append("product.is_offer_available,");
+        selectQuery.append("product.product_discount,");
+        selectQuery.append("product.product_description,");
+//        selectQuery.append("product.product_tax,");
+//        selectQuery.append("product.image_url,");
+//        selectQuery.append("product.product_quantity_to_buy,");
+        selectQuery.append("product.product_brand,");
+        selectQuery.append("product.product_model_number,");
+        selectQuery.append("product.product_model_name");
+
+        fromQuery.append(" from testdb.product_overview product");
+        whereQuery.append(" where product.product_catalog_productcatalog_id ='" + productDetailId+"'");
+
+
+        Query query = entityManager.createNativeQuery(selectQuery.toString()
+                .concat(fromQuery.toString()
+                        .concat(whereQuery.toString())), Tuple.class);
+        tuples = (List<Tuple>) query.getResultList();
+        List<ProductOverviewModel> productOverviewModel = tuples.stream().map(ConvertTupleToModel::convertToProductOverviewModel).collect(Collectors.toList());
+
+        return productOverviewModel.get(0);
+    }
+    
 
     @Transactional
     public void updateProductsQuantity(Integer productQuantity,Integer productCatalogUniqueId){

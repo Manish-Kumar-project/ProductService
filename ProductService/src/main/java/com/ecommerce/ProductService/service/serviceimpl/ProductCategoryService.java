@@ -5,6 +5,7 @@ import com.ecommerce.ProductService.entities.ProductCategory;
 import com.ecommerce.ProductService.entities.ProductOverview;
 import com.ecommerce.ProductService.model.v1.ProductCatalogModel;
 import com.ecommerce.ProductService.model.v1.ProductCategoryModel;
+import com.ecommerce.ProductService.model.v1.ProductOverviewModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductCatalogRepository;
 import com.ecommerce.ProductService.repository.ProductCategoryRepository;
@@ -134,5 +135,8 @@ public class ProductCategoryService {
         ProductCatalog productCatalogModelFromDB = productCatalogRepository.findByProductCatalogUniqueId(productCatalogModel.getProductCatalogUniqueId());
         Integer productUpdateQuantity = productCatalogModelFromDB.getProductCatalogQuantity() - productCatalogModel.getProductCatalogQuantity();
         productCategoryImplementation.updateProductsQuantity(productUpdateQuantity,productCatalogModel.getProductCatalogUniqueId());
+    }
+    public ProductOverviewModel getProductOverview(Integer productDetailId) {
+        return productCategoryImplementation.getProductOverview(productDetailId);
     }
     }

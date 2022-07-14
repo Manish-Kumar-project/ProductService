@@ -3,6 +3,7 @@ package com.ecommerce.ProductService.controller;
 import com.ecommerce.ProductService.entities.Product;
 import com.ecommerce.ProductService.entities.ProductCatalog;
 import com.ecommerce.ProductService.entities.ProductCategory;
+import com.ecommerce.ProductService.model.v1.ProductOverviewModel;
 import com.ecommerce.ProductService.model.v1.SearchCriteriaBaseModel;
 import com.ecommerce.ProductService.repository.ProductRepository;
 import com.ecommerce.ProductService.repository.impl.ProductCategoryImplementation;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/product")
+@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 public class ProductController {
 
     @Autowired
@@ -65,4 +67,10 @@ public class ProductController {
         SearchCriteriaBaseModel searchCriteriaBaseModel = productCategoryService.getProductCatalogList();
         return new ResponseEntity<SearchCriteriaBaseModel>(searchCriteriaBaseModel,HttpStatus.OK);
     }
-}
+    @GetMapping(value = "/product-detail/{id}")
+    public ResponseEntity<ProductOverviewModel> getProductOverview(@PathVariable Integer id) {
+        ProductOverviewModel productOverviewModel = new ProductOverviewModel();
+        productOverviewModel = productCategoryService.getProductOverview(id);
+        return new ResponseEntity<ProductOverviewModel>(productOverviewModel,HttpStatus.OK);
+    }
+    }
